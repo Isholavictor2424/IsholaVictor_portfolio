@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 dotenv.config();
 
@@ -19,21 +19,7 @@ app.use(
 
 app.use(express.json());
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-transporter.verify((error) => {
-  if (error) {
-    console.error("Email transporter error:", error);
-  } else {
-    console.log("Email server is ready");
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post("/send-email", async (req, res) => {
   try {
@@ -46,19 +32,40 @@ app.post("/send-email", async (req, res) => {
       });
     }
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    const { data, error } = await resend.emails.send({
+      from: "Decodius Portfolio <onboarding@resend.dev>",
+
+      // For now, use the same email address you used
+      // to create your Resend account.
+      to: [process.env.CONTACT_EMAIL],
+
       replyTo: email,
-      to: process.env.EMAIL_USER,
+
       subject: `Portfolio Message from ${name}`,
+
       html: `
-        <h2>New Contact Message</h2>
+        <h2>New Portfolio Message</h2>
+
         <p><strong>Name:</strong> ${name}</p>
+
         <p><strong>Email:</strong> ${email}</p>
+
         <p><strong>Message:</strong></p>
+
         <p>${message}</p>
       `,
     });
+
+    if (error) {
+      console.error("Resend error:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to send message",
+      });
+    }
+
+    console.log("Email sent:", data);
 
     return res.status(200).json({
       success: true,
@@ -69,7 +76,7 @@ app.post("/send-email", async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: "Failed to send email",
+      message: "Failed to send message",
     });
   }
 });
