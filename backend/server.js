@@ -7,13 +7,23 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://portfolio-vtab.vercel.app",
+  "https://portfolio-xi-tan-9r2k0ltykh.vercel.app",
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://portfolio-vtab.vercel.app",
-    ],
-    methods: ["GET", "POST"],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   })
 );
 
@@ -34,24 +44,14 @@ app.post("/send-email", async (req, res) => {
 
     const { data, error } = await resend.emails.send({
       from: "Decodius Portfolio <onboarding@resend.dev>",
-
-      // For now, use the same email address you used
-      // to create your Resend account.
       to: [process.env.CONTACT_EMAIL],
-
       replyTo: email,
-
       subject: `Portfolio Message from ${name}`,
-
       html: `
         <h2>New Portfolio Message</h2>
-
         <p><strong>Name:</strong> ${name}</p>
-
         <p><strong>Email:</strong> ${email}</p>
-
         <p><strong>Message:</strong></p>
-
         <p>${message}</p>
       `,
     });
