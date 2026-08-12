@@ -7,7 +7,16 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://portfolio-vtab.vercel.app",
+    ],
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
@@ -18,12 +27,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://portfolio-vtab.vercel.app/"
-  ]
-}));
+transporter.verify((error) => {
+  if (error) {
+    console.error("Email transporter error:", error);
+  } else {
+    console.log("Email server is ready");
+  }
+});
 
 app.post("/send-email", async (req, res) => {
   try {
@@ -36,31 +46,28 @@ app.post("/send-email", async (req, res) => {
       });
     }
 
-    const mailOptions = {
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       replyTo: email,
       to: process.env.EMAIL_USER,
       subject: `Portfolio Message from ${name}`,
       html: `
         <h2>New Contact Message</h2>
-
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
-
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      message: "Email sent successfully",
+      message: "Message sent successfully",
     });
   } catch (error) {
-    console.log(error);
+    console.error("Send email error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Failed to send email",
     });
@@ -68,9 +75,11 @@ app.post("/send-email", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Portfolio Contact API");
+  res.send("Portfolio Contact API is running");
 });
 
-app.listen(process.env.PORT || 10000, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
