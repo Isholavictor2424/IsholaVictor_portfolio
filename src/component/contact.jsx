@@ -24,10 +24,10 @@ function Contact() {
 
     try {
       const response = await axios.post(
-        "https://portfolio-api-o5kq.onrender.com/",
+        `${import.meta.env.VITE_API_URL}/send-email`,
         formData
       );
-
+      
 
       alert(response.data.message);
 
