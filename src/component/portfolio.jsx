@@ -6,7 +6,7 @@ const projects = [
       "A machine learning system that classifies hypertension and hypotension risk — my final year project.",
     label: "Final Year Project",
     technologies: ["Python", "Machine Learning", "Data Analysis", "Healthcare"],
-    href: null,
+    href: "https://github.com/Isholavictor2424/hyperCatch",
   },
   {
     number: "02",
