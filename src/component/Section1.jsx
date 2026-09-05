@@ -1,4 +1,4 @@
-import profileImage from "../assets/updatedPic.png";
+import profileImage from "../assets/updatedPic.jpeg";
 
 function Section1() {
   return (
