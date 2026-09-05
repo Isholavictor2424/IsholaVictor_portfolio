@@ -5,7 +5,7 @@ function Section1() {
     <section className="hero" id="top">
       <div className="hero-grid">
         <div className="hero-content">
-          <p className="eyebrow">Frontend Developer &amp; AI Automation Builder</p>
+          <p className="eyebrow">Frontend Developer &amp; AI Automation Specialist</p>
 
           <h1 className="hero-name">Victor Ishola</h1>
 
