@@ -1,40 +1,29 @@
-import React from "react";
-
 function About() {
   return (
-    <section id="about" className="bg-[#C1C1C1] min-h-screen py-16 px-6">
-      <div className="text-center py-5">
-        <h1 className="text-4xl font-bold border-2 border-black inline-block px-6 py-2">
-          About Me
-        </h1>
-      </div>
+    <section className="section" id="about">
+      <div className="container">
+        <div className="section-heading">
+          <p className="eyebrow">About</p>
+          <h2 className="section-title">A little about me.</h2>
+        </div>
 
-      <div className="max-w-4xl mx-auto py-10 text-gray-800 space-y-6">
-        <p className="text-lg leading-8">
-          I am Victor Ishola, a Computer Science student passionate about building
-          modern digital products, especially mobile applications. I focus on
-          creating intuitive user interfaces and seamless user experiences.
-        </p>
+        <div className="about-content">
+          <p className="about-text">
+            I graduated top of my class in Computer Science at LAUTECH, but
+            what actually keeps me up at night is the space where{" "}
+            <strong>software, automation, and AI</strong> meet.
+          </p>
 
-        <p className="text-lg leading-8">
-          I am currently learning Flutter while strengthening my skills in React,
-          React Native, HTML, CSS, and JavaScript through hands-on projects. I
-          lean toward mobile-first development because I believe mobile products
-          create direct impact.
-        </p>
-
-        <p className="text-lg leading-8">
-          I am refining my frontend engineering skills, building scalable
-          applications, improving UI implementation, and preparing for
-          professional opportunities where I can gain mentorship and real-world
-          experience.
-        </p>
-
-        <p className="text-lg leading-8">
-          Beyond coding, I am committed to growth, discipline, and building a
-          long-term tech career that combines technical excellence with meaningful
-          impact.
-        </p>
+          <p className="about-supporting">
+            My work spans frontend development, mobile apps, and building
+            automations that connect the tools people already use. I like
+            projects where the technical part is only half the job — the
+            other half is making something that's genuinely easy for a real
+            person to use. Outside of code, I've spent time interning at
+            Cephas ICT Hub and OGTECH Networks, picking up how things get
+            built in practice, not just in theory.
+          </p>
+        </div>
       </div>
     </section>
   );

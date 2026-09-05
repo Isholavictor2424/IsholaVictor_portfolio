@@ -1,9 +1,13 @@
-import React from "react";
-
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-white text-center py-6">
-      <p>© 2026 Decodius. All rights reserved.</p>
+    <footer className="footer">
+      <div className="footer-inner">
+        <a className="footer-logo" href="#top">
+          DECODIUS.
+        </a>
+
+        <p className="footer-copy">© 2026</p>
+      </div>
     </footer>
   );
 }

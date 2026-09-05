@@ -1,42 +1,49 @@
-import React from "react";
-import updatedPic from "../assets/updatedPic.png";
+import profileImage from "../assets/updatedPic.png";
 
 function Section1() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gray-900 flex flex-col md:flex-row items-center justify-between px-6 md:px-20 pt-16">
-      <div className="absolute top-0 right-0 hidden md:block w-1/2 h-full bg-[#C1C1C1] transform -skew-x-12 origin-top-right z-0"></div>
+    <section className="hero" id="top">
+      <div className="hero-grid">
+        <div className="hero-content">
+          <p className="eyebrow">Frontend Developer &amp; AI Automation Builder</p>
 
-      <div className="relative z-10 w-full md:w-1/2 text-white text-center md:text-left mt-10 md:mt-0">
-        <p className="text-lg md:text-xl mb-4">Hi, I am</p>
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-          Victor Ishola
-        </h1>
-        <p className="mt-4 text-gray-400 text-lg md:text-xl">
-          Mobile / Web Frontend Developer
-        </p>
+          <h1 className="hero-name">Victor Ishola</h1>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <a
-            href="#portfolio"
-            className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-sky-500 hover:text-white transition"
-          >
-            View Projects
-          </a>
-          <a
-            href="#contact"
-            className="border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition"
-          >
-            Contact Me
-          </a>
+          <p className="hero-title">
+            I build interfaces people enjoy using — then wire up the
+            automation that makes them actually work.
+          </p>
+
+          <p className="hero-description">
+            Based in Ogbomoso, Nigeria. I studied Computer Science at LAUTECH,
+            and now split my time between frontend development in React and
+            React Native, and building AI-driven automations with tools like
+            n8n and Make.
+          </p>
+
+          <div className="hero-stack" aria-label="Core technologies">
+            <span>React</span>
+            <span>React Native</span>
+            <span>n8n</span>
+            <span>AI Automation</span>
+          </div>
+
+          <div className="hero-actions">
+            <a className="button-primary" href="#work">
+              See my work
+            </a>
+
+            <a className="button-secondary" href="#contact">
+              Say hello
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div className="relative z-10 w-full md:w-1/2 flex justify-center mt-10 md:mt-0">
-        <img
-          src={updatedPic}
-          alt="Victor"
-          className="max-h-[95vh] object-contain"
-        />
+        <div className="hero-image-wrapper">
+          <div className="hero-image-frame">
+            <img className="hero-image" src={profileImage} alt="Victor Ishola" />
+          </div>
+        </div>
       </div>
     </section>
   );
