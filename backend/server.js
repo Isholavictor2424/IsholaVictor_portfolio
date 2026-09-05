@@ -12,8 +12,7 @@ const PORT = process.env.PORT || 10000;
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
-  "https://portfolio-vtab.vercel.app",
-  "https://portfolio-xi-tan-9r2k0ltykh.vercel.app",
+  "https://ishola-victor-portfolio.vercel.app",
 ].filter(Boolean);
 
 const corsOptions = {
